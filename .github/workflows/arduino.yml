@@ -1,0 +1,32 @@
+name: Make Arduino
+on:
+  push:
+    paths:
+      - 'arduino/**'
+  release:
+
+jobs:
+  make_bin:
+    runs-on: ubuntu-latest
+    name: Binary Builder
+    steps:
+    - uses: actions/checkout@v2
+
+    - run: cd arduino/robot && make bin
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: ProWheel_Arduino_Binaries
+        path: arduino/robot/_build/arduino.avr.mega/*
+  
+  make_lint:
+    runs-on: ubuntu-latest
+    name: c++ Delinter
+    steps:
+    - uses: actions/checkout@v2
+
+      # Change these l8r!
+    - run: touch arduino/robot/README.md
+    - run: touch arduino/robot/COPYING
+
+    - run: cd arduino/robot && make lint
