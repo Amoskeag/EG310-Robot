@@ -4,13 +4,13 @@
 class Mecanum
 {
 private:
-    unsigned int encApin; // A Channel encoder pin
-    unsigned int encBpin; // B Channel encoder pin
-    unsigned int dirPin;  // Determines the direction of this module.
-    unsigned int pwmPin;  // PWM pin to determine speed
-    bool isInverted;      // Is this module inverted?
+    byte encApin;    // A Channel encoder pin
+    byte encBpin;    // B Channel encoder pin
+    byte dirPin;     // Determines the direction of this module.
+    byte pwmPin;     // PWM pin to determine speed
+    bool isInverted; // Is this module inverted?
 public:
-    Mecanum(unsigned int _EncApin, unsigned int _EncBpin, unsigned int _DirPin, unsigned int _pwmPin, bool _isInverted = false)
+    Mecanum(byte _EncApin, byte _EncBpin, byte _DirPin, byte _pwmPin, bool _isInverted = false)
     {
         // Make all these init values members of this class
         encApin = _EncApin;
