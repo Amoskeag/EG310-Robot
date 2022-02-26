@@ -18,6 +18,8 @@ public:
         dirPin = _DirPin;
         pwmPin = _pwmPin;
         isInverted = _isInverted;
+
+        // Pinmodes, exercise to the reader ;)
     };
 
     void setSpeed(signed int speed)

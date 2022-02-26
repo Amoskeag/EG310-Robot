@@ -7,7 +7,9 @@
 // Custom objects
 #include "modules/mecanum_module.cpp"
 
-Mecanum front_left_Mecanum(1, 2, 3, 4);
+Mecanum front_left_mecanum(1, 2, 3, 4);
+Mecanum front_right_mecanum(5, 6, 7, 8, true);
+// More modules, exercise to the reader ;)
 
 void setup()
 {
@@ -26,12 +28,12 @@ void setup()
 
 void loop()
 {
-  front_left_Mecanum.setSpeed(255);
+  front_left_mecanum.setSpeed(255);
   delay(1000); // Dont do dis irl lol
-  front_left_Mecanum.setSpeed(0);
+  front_left_mecanum.setSpeed(0);
   delay(1000); // Dont do dis irl lol
-  front_left_Mecanum.setSpeed(-255);
+  front_left_mecanum.setSpeed(-255);
   delay(1000); // Dont do dis irl lol
-  front_left_Mecanum.setSpeed(0);
+  front_left_mecanum.setSpeed(0);
   delay(1000); // Dont do dis irl lol
 }
