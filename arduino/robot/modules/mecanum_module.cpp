@@ -20,6 +20,9 @@ public:
         isInverted = _isInverted;
 
         // Pinmodes, exercise to the reader ;)
+
+        // Attach interrupts
+        attachInterrupt(encApin, encoderISR, RISING);
     };
 
     void setSpeed(signed int speed)
@@ -42,6 +45,8 @@ public:
         // Write the PWM value to the pwm pin
         analogWrite(pwmPin, speed);
     };
+
+    static void encoderISR(){};
 
     // TODO: Get current speed here!
 };
