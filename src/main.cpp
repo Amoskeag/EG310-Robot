@@ -2,13 +2,16 @@
 // Joe, Arthur
 
 // Config/Build
-#include "version.h"
+//#include "version.h"
 
 // Custom objects
-#include "modules/mecanum_module.cpp"
+#include <Arduino.h>
+#include "mecanum.h"
+
 
 Mecanum front_left_mecanum(1, 2, 3, 4);
 Mecanum front_right_mecanum(5, 6, 7, 8, true);
+//Mecanum back_left_mecanum(x, )
 // More modules, exercise to the reader ;)
 
 void setup()
@@ -19,11 +22,11 @@ void setup()
   // Print out some information about the software we're running.
   Serial.println();
   Serial.print("Starting robot software. Using version ");
-  Serial.println(VERSION);
+  //Serial.println(VERSION);
   Serial.print("This software compiled on ");
-  Serial.println(COMPILED_ON);
+  // Serial.println(COMPILED_ON);
   Serial.println();
-  delay(500); // This is ok to use here
+  delay(500);
 }
 
 void loop()
