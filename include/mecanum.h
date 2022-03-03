@@ -21,4 +21,6 @@ public:
 
     void updateEncoder();
 	
+    void getSpeed();
+    
 };
