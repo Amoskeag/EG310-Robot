@@ -34,52 +34,52 @@ void setup()
   // Print out some information about the software we're running.
   Serial.println();
   Serial.print("Starting robot software. Using version ");
-  //Serial.println(VERSION);
+  // Serial.println(VERSION);
   Serial.print("This software compiled on ");
   // Serial.println(COMPILED_ON);
   Serial.println();
 
-  //Set Interupt pins, fix code structure later.
+  // Set Interupt pins, fix code structure later.
   attachInterrupt(digitalPinToInterrupt(fL_Encoder), checkEncoder, RISING);
   attachInterrupt(digitalPinToInterrupt(fR_Encoder), checkEncoder, RISING);
   attachInterrupt(digitalPinToInterrupt(bL_Encoder), checkEncoder, RISING);
   attachInterrupt(digitalPinToInterrupt(bR_Encoder), checkEncoder, RISING);
-  
+
   delay(500);
 }
 
-void checkEncoder()
-{
+// void checkEncoder()
+// {
 
-  //Direction of wheel
-  int _currentStateA = digitalRead(EncoderPinA);
+//   //Direction of wheel
+//   int _currentStateA = digitalRead(EncoderPinA);
 
-  //Look for movement of wheel
-  if( (_currentStateA == LOW) && (_currentStateA == HIGH)){
+//   //Look for movement of wheel
+//   if( (_currentStateA == LOW) && (_currentStateA == HIGH)){
 
-    if(digitalRead(EncoderPinB) == HIGH){
-        Serial.println("Right");
-    } 
-    else 
-    {
-        Serial.println("Left");
-    }
-  }
+//     if(digitalRead(EncoderPinB) == HIGH){
+//         Serial.println("Right");
+//     }
+//     else
+//     {
+//         Serial.println("Left");
+//     }
+//   }
 
-  previousStateA = _currentStateA;		//Store
+//   previousStateA = _currentStateA;		//Store
 
-}
+// }
 
 void loop()
 {
   front_left_mecanum.setSpeed(255);
-  delay(1000); 
+  delay(1000);
   front_left_mecanum.setSpeed(0);
-  delay(1000); 
+  delay(1000);
   front_left_mecanum.setSpeed(-255);
-  delay(1000); 
+  delay(1000);
   front_left_mecanum.setSpeed(0);
-  delay(1000); 
+  delay(1000);
 }
 
 /*void updateEncoder(int EncoderPinA, int EncoderPinB, bool previousStateA ){
@@ -92,8 +92,8 @@ if( (_currentStateA == LOW) && (_currentStateA == HIGH)){
 
     if(digitalRead(EncoderPinB) == HIGH){
         Serial.println("Right");
-    } 
-    else 
+    }
+    else
     {
         Serial.println("Left");
     }
