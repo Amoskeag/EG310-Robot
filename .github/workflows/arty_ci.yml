@@ -94,3 +94,4 @@ jobs:
           file: "arduino_binaries.zip"
           tag: ${{ github.ref }}
           overwrite: true
+          body: "Use avrduess https://blog.zakkemble.net/avrdudess-a-gui-for-avrdude/ to write the .hex to the arduino."
