@@ -20,11 +20,32 @@
 
 bool previous_state_A = LOW;
 
-Mecanum front_left_mecanum(4, fL_Encoder, 8, PWM_FL);
+Mecanum front_left_mecanum(4, fL_Encoder, 8, PWM_FL, false);
 Mecanum front_right_mecanum(5, fR_Encoder, 13, PWM_FR, true);
-Mecanum back_left_mecanum(6, bL_Encoder, 14, PWM_BL);
+Mecanum back_left_mecanum(6, bL_Encoder, 14, PWM_BL, false);
 Mecanum back_right_mecanum(7, bR_Encoder, 15, PWM_BR, true);
 // More modules
+
+// Joe wrote this, remove it later
+void fl_encoder_callback()
+{
+  front_left_mecanum.updateEncoder();
+}
+
+void fr_encoder_callback()
+{
+  front_right_mecanum.updateEncoder();
+}
+
+void bl_encoder_callback()
+{
+  back_left_mecanum.updateEncoder();
+}
+
+void br_encoder_callback()
+{
+  back_right_mecanum.updateEncoder();
+}
 
 void setup()
 {
@@ -40,35 +61,13 @@ void setup()
   Serial.println();
 
   // Set Interupt pins, fix code structure later.
-  attachInterrupt(digitalPinToInterrupt(fL_Encoder), checkEncoder, RISING);
-  attachInterrupt(digitalPinToInterrupt(fR_Encoder), checkEncoder, RISING);
-  attachInterrupt(digitalPinToInterrupt(bL_Encoder), checkEncoder, RISING);
-  attachInterrupt(digitalPinToInterrupt(bR_Encoder), checkEncoder, RISING);
+  attachInterrupt(digitalPinToInterrupt(fL_Encoder), fl_encoder_callback, RISING);
+  attachInterrupt(digitalPinToInterrupt(fR_Encoder), fr_encoder_callback, RISING);
+  attachInterrupt(digitalPinToInterrupt(bL_Encoder), bl_encoder_callback, RISING);
+  attachInterrupt(digitalPinToInterrupt(bR_Encoder), br_encoder_callback, RISING);
 
   delay(500);
 }
-
-// void checkEncoder()
-// {
-
-//   //Direction of wheel
-//   int _currentStateA = digitalRead(EncoderPinA);
-
-//   //Look for movement of wheel
-//   if( (_currentStateA == LOW) && (_currentStateA == HIGH)){
-
-//     if(digitalRead(EncoderPinB) == HIGH){
-//         Serial.println("Right");
-//     }
-//     else
-//     {
-//         Serial.println("Left");
-//     }
-//   }
-
-//   previousStateA = _currentStateA;		//Store
-
-// }
 
 void loop()
 {

@@ -1,11 +1,8 @@
 // Pro WHeel
 // EG-310, SNHU
-#define LOW 0
-#define HIGH 1
 
 #include <Arduino.h>
 #include "mecanum.h"
-
 
 Mecanum::Mecanum(int _EncoderPinA, int _EncoderPinB, int _DirPin, int _pwmPin, bool _isInverted = false)
 {
@@ -21,15 +18,16 @@ Mecanum::Mecanum(int _EncoderPinA, int _EncoderPinB, int _DirPin, int _pwmPin, b
     pinMode(EncoderPinB, INPUT);
     pinMode(dirPin, OUTPUT);
     pinMode(pwmPin, OUTPUT);
-    
+
+    // attachInterrupt(EncoderPinA, updateEncoder, RISING);
 };
 
 void Mecanum::setSpeed(signed int speed)
 {
     /* A method to set the speed of
-        * this particular mecanum module.
-        * Speed is an int from -255 to 255
-        */
+     * this particular mecanum module.
+     * Speed is an int from -255 to 255
+     */
 
     int _dir = LOW;
 
@@ -46,29 +44,30 @@ void Mecanum::setSpeed(signed int speed)
 };
 
 // TODO: Get current speed here!
-void Mecanum::getSpeed(){
+void Mecanum::getSpeed()
+{
     Serial.print("Motor Speed here");
 };
 
-void Mecanum::updateEncoder(){
+void Mecanum::updateEncoder()
+{
 
-//Direction of wheel
-int _currentStateA = digitalRead(EncoderPinA);
+    // Direction of wheel
+    int _currentStateA = digitalRead(EncoderPinA);
 
-//Look for movement of wheel
-if( (_currentStateA == LOW) && (_currentStateA == HIGH)){
-
-    if(digitalRead(EncoderPinB) == HIGH){
-        Serial.println("Right");
-    } 
-    else 
+    // Look for movement of wheel
+    if ((_currentStateA == LOW) && (_currentStateA == HIGH))
     {
-        Serial.println("Left");
+
+        if (digitalRead(EncoderPinB) == HIGH)
+        {
+            Serial.println("Right");
+        }
+        else
+        {
+            Serial.println("Left");
+        }
     }
-}
 
-previousStateA = _currentStateA;		//Store
-
+    previousStateA = _currentStateA; // Store
 };
-
-
