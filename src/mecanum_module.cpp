@@ -17,6 +17,11 @@ Mecanum::Mecanum(int _EncoderPinA, int _EncoderPinB, int _DirPin, int _pwmPin, b
     isInverted = _isInverted;
 
     // Pinmodes, exercise to the reader ;)
+    pinMode(EncoderPinA, INPUT);
+    pinMode(EncoderPinB, INPUT);
+    pinMode(dirPin, OUTPUT);
+    pinMode(pwmPin, OUTPUT);
+    
 };
 
 void Mecanum::setSpeed(signed int speed)
@@ -40,6 +45,11 @@ void Mecanum::setSpeed(signed int speed)
     analogWrite(pwmPin, speed);
 };
 
+// TODO: Get current speed here!
+void Mecanum::getSpeed(){
+    Serial.print("Motor Speed here");
+};
+
 void Mecanum::updateEncoder(){
 
 //Direction of wheel
@@ -58,6 +68,7 @@ if( (_currentStateA == LOW) && (_currentStateA == HIGH)){
 }
 
 previousStateA = _currentStateA;		//Store
+
 };
 
-// TODO: Get current speed here!
+
