@@ -49,24 +49,18 @@ void br_encoder_callback()
 
 void setup()
 {
-  // Init serial
+  // Setup Serial
   Serial.begin(115200);
+  delay(200);
 
-  // Print out some information about the software we're running.
-  Serial.println();
-  Serial.print("Starting robot software. Using version ");
-  // Serial.println(VERSION);
-  Serial.print("This software compiled on ");
-  // Serial.println(COMPILED_ON);
-  Serial.println();
+  // Print MOTD
+  Serial.println(MOTD);
 
   // Set Interupt pins, fix code structure later.
   attachInterrupt(digitalPinToInterrupt(fL_Encoder), fl_encoder_callback, RISING);
   attachInterrupt(digitalPinToInterrupt(fR_Encoder), fr_encoder_callback, RISING);
   attachInterrupt(digitalPinToInterrupt(bL_Encoder), bl_encoder_callback, RISING);
   attachInterrupt(digitalPinToInterrupt(bR_Encoder), br_encoder_callback, RISING);
-
-  delay(500);
 }
 
 void loop()
