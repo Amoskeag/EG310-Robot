@@ -66,13 +66,29 @@ void setup()
 void loop()
 {
   front_left_mecanum.setSpeed(255);
+  front_right_mecanum.setSpeed(255);
+  back_left_mecanum.setSpeed(255);
+  back_right_mecanum.setSpeed(255);
   delay(1000);
   front_left_mecanum.setSpeed(0);
+  front_right_mecanum.setSpeed(0);
+  back_left_mecanum.setSpeed(0);
+  back_right_mecanum.setSpeed(0);
   delay(1000);
   front_left_mecanum.setSpeed(-255);
+  front_right_mecanum.setSpeed(-255);
+  back_left_mecanum.setSpeed(-255);
+  back_right_mecanum.setSpeed(-255);
   delay(1000);
   front_left_mecanum.setSpeed(0);
+  front_right_mecanum.setSpeed(0);
+  back_left_mecanum.setSpeed(0);
+  back_right_mecanum.setSpeed(0);
   delay(1000);
+  front_left_mecanum.setSpeed(0);
+  front_right_mecanum.setSpeed(255);
+  back_left_mecanum.setSpeed(255);
+  back_right_mecanum.setSpeed(0);
 }
 
 /*void updateEncoder(int EncoderPinA, int EncoderPinB, bool previousStateA ){
