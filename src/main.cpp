@@ -7,6 +7,7 @@
 // Custom objects
 #include <Arduino.h>
 #include "mecanum.h"
+#include "operator.h"
 
 #define PWM_FL 9
 #define PWM_FR 10
@@ -25,6 +26,8 @@ Mecanum front_right_mecanum(5, fR_Encoder, 13, PWM_FR, true);
 Mecanum back_left_mecanum(6, bL_Encoder, 14, PWM_BL, false);
 Mecanum back_right_mecanum(7, bR_Encoder, 15, PWM_BR, true);
 // More modules
+
+const Operator humanOperator = Operator(1, 2, 3);
 
 // Joe wrote this, remove it later
 void fl_encoder_callback()
