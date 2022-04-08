@@ -4,6 +4,8 @@
 #include <Arduino.h>
 #include "mecanum.h"
 
+#include "Servo.h"
+
 Mecanum::Mecanum(int _EncoderPinA, int _EncoderPinB, int _DirPin, int _pwmPin, bool _isInverted = false)
 {
     // Make all these init values members of this class
@@ -17,10 +19,17 @@ Mecanum::Mecanum(int _EncoderPinA, int _EncoderPinB, int _DirPin, int _pwmPin, b
     pinMode(EncoderPinA, INPUT);
     pinMode(EncoderPinB, INPUT);
     pinMode(dirPin, OUTPUT);
-    pinMode(pwmPin, OUTPUT);
+    // pinMode(pwmPin, OUTPUT);
 
     // attachInterrupt(EncoderPinA, updateEncoder, RISING);
+    Servo moduleServo;
 };
+
+void Mecanum::begin()
+{
+    // Construct ESCs
+    moduleServo.attach(pwmPin);
+}
 
 void Mecanum::setSpeed(signed int speed)
 {
@@ -42,6 +51,11 @@ void Mecanum::setSpeed(signed int speed)
     // Write the PWM value to the pwm pin
     analogWrite(pwmPin, speed);
 };
+
+void Mecanum::setRawSpeed(int speed) const
+{
+    moduleServo.writeMicroseconds(speed);
+}
 
 // TODO: Get current speed here!
 void Mecanum::getSpeed()

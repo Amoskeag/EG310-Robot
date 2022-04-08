@@ -5,6 +5,8 @@
  *
  */
 
+#include "Servo.h"
+
 class Mecanum
 {
 private:
@@ -14,11 +16,16 @@ private:
     int pwmPin;      // PWM pin to determine speed
     bool isInverted; // Is this module inverted?
     int previousStateA;
+    Servo moduleServo;
 
 public:
     Mecanum(int _EncApin, int _EncBpin, int _DirPin, int _pwmPin, bool _isInverted = false);
 
+    void begin();
+
     void setSpeed(signed int speed);
+
+    void setRawSpeed(int speed) const;
 
     void updateEncoder();
 
