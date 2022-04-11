@@ -10,17 +10,12 @@
 #include "operator.h"
 #include "Servo.h"
 
-#define PWM_FL 9
-#define PWM_FR 10
-#define PWM_BL 11
-#define PWM_BR 12
+#define PWM_FL 3
+#define PWM_FR 4
+#define PWM_BL 5
+#define PWM_BR 6
 
 #define STBY 1500
-
-#define fL_Encoder 2
-#define fR_Encoder 3
-#define bL_Encoder 20
-#define bR_Encoder 21
 
 bool previous_state_A = LOW;
 
@@ -34,7 +29,7 @@ Servo back_left_mecanum;
 Servo back_right_mecanum;
 // More modules
 
-const Operator humanOperator = Operator(1, 2, 3);
+const Operator humanOperator = Operator(4, 3, 5);
 
 void setup()
 {
@@ -54,6 +49,8 @@ void setup()
   back_left_mecanum.attach(PWM_BL);
   // attachInterrupt(digitalPinToInterrupt(bR_Encoder), br_encoder_callback, RISING);
   back_right_mecanum.attach(PWM_BR);
+
+  digitalWrite(8, 1);
 }
 
 void loop()
