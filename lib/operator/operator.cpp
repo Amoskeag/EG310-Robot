@@ -32,7 +32,7 @@ int Operator::getPitch() const
     _ret = pulseIn(pitchPin, HIGH);
 
     // Map ret between -128 and 128
-    _ret = map(_ret, recvMin, recvMax, -128, 128);
+    //_ret = map(_ret, recvMin, recvMax, -128, 128);
 
     return _ret;
 };
@@ -42,7 +42,7 @@ int Operator::getRoll() const
     _ret = pulseIn(rollPin, HIGH);
 
     // Map ret between -128 and 128
-    _ret = map(_ret, recvMin, recvMax, -128, 128);
+    //_ret = map(_ret, recvMin, recvMax, -128, 128);
 
     return _ret;
 };
@@ -51,7 +51,7 @@ int Operator::getYaw() const
     _ret = pulseIn(yawPin, HIGH);
 
     // Map ret between -128 and 128
-    _ret = map(_ret, recvMin, recvMax, -128, 128);
+    //_ret = map(_ret, recvMin, recvMax, -128, 128);
 
     return _ret;
 };

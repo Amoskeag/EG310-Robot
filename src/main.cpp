@@ -29,7 +29,11 @@ Servo back_left_mecanum;
 Servo back_right_mecanum;
 // More modules
 
-const Operator humanOperator = Operator(4, 3, 5);
+const Operator humanOperator = Operator(51, 50, 52);
+
+int pit;
+int rol;
+int yaw;
 
 void setup()
 {
@@ -50,14 +54,15 @@ void setup()
   // attachInterrupt(digitalPinToInterrupt(bR_Encoder), br_encoder_callback, RISING);
   back_right_mecanum.attach(PWM_BR);
 
-  digitalWrite(8, 1);
+  pinMode(8, OUTPUT);
+  digitalWrite(8, LOW);
 }
 
 void loop()
 {
-  int pit = STBY - humanOperator.getPitch();
-  int rol = STBY - humanOperator.getRoll();
-  int yaw = STBY - humanOperator.getYaw();
+  pit = STBY - humanOperator.getPitch();
+  rol = STBY - humanOperator.getRoll();
+  yaw = STBY - humanOperator.getYaw();
 
   front_left_mecanum.writeMicroseconds(STBY + rol + pit - yaw);
   front_right_mecanum.writeMicroseconds(STBY + -rol + pit - yaw);
