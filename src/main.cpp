@@ -10,10 +10,10 @@
 #include "operator.h"
 #include "Servo.h"
 
-#define PWM_FL 3
-#define PWM_FR 4
-#define PWM_BL 5
-#define PWM_BR 6
+#define PWM_FL 10
+#define PWM_FR 11
+#define PWM_BL 12
+#define PWM_BR 13
 
 #define STBY 1500
 
@@ -35,6 +35,11 @@ int pit;
 int rol;
 int yaw;
 
+int _fl;
+int _fr;
+int _bl;
+int _br;
+
 void setup()
 {
   // Setup Serial
@@ -53,9 +58,6 @@ void setup()
   back_left_mecanum.attach(PWM_BL);
   // attachInterrupt(digitalPinToInterrupt(bR_Encoder), br_encoder_callback, RISING);
   back_right_mecanum.attach(PWM_BR);
-
-  pinMode(8, OUTPUT);
-  digitalWrite(8, LOW);
 }
 
 void loop()
@@ -64,10 +66,51 @@ void loop()
   rol = STBY - humanOperator.getRoll();
   yaw = STBY - humanOperator.getYaw();
 
-  front_left_mecanum.writeMicroseconds(STBY + rol + pit - yaw);
-  front_right_mecanum.writeMicroseconds(STBY + -rol + pit - yaw);
-  back_left_mecanum.writeMicroseconds(STBY + rol + pit + yaw);
-  back_right_mecanum.writeMicroseconds(STBY + -rol + pit + yaw);
+  // _fl = STBY + rol + pit - yaw;
+  // _fr = STBY + -rol + pit - yaw;
+  // _bl = STBY + rol + pit + yaw;
+  // _br = STBY + -rol + pit + yaw;
+
+  _fl = STBY - pit;
+  _fr = STBY + pit;
+  _bl = STBY - pit;
+  _br = STBY - pit; // Wired wrong
+
+  if (abs(STBY - _fl) > 100)
+  {
+    front_left_mecanum.writeMicroseconds(_fl);
+  }
+  else
+  {
+    front_left_mecanum.writeMicroseconds(STBY);
+  }
+
+  if (abs(STBY - _fr) > 100)
+  {
+    front_right_mecanum.writeMicroseconds(_fr);
+  }
+  else
+  {
+    front_right_mecanum.writeMicroseconds(STBY);
+  }
+
+  if (abs(STBY - _bl) > 100)
+  {
+    back_left_mecanum.writeMicroseconds(_bl);
+  }
+  else
+  {
+    back_left_mecanum.writeMicroseconds(STBY);
+  }
+
+  if (abs(STBY - _br) > 100)
+  {
+    back_right_mecanum.writeMicroseconds(_br);
+  }
+  else
+  {
+    back_right_mecanum.writeMicroseconds(STBY);
+  }
 }
 
 /*void updateEncoder(int EncoderPinA, int EncoderPinB, bool previousStateA ){
