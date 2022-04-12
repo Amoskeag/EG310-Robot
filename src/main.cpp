@@ -12,7 +12,7 @@
 
 #define PWM_FL 10
 #define PWM_FR 11
-#define PWM_BL 12
+#define PWM_BL 9
 #define PWM_BR 13
 
 #define STBY 1500
@@ -66,15 +66,10 @@ void loop()
   rol = STBY - humanOperator.getRoll();
   yaw = STBY - humanOperator.getYaw();
 
-  // _fl = STBY + rol + pit - yaw;
-  // _fr = STBY + -rol + pit - yaw;
-  // _bl = STBY + rol + pit + yaw;
-  // _br = STBY + -rol + pit + yaw;
-
-  _fl = STBY - pit;
-  _fr = STBY + pit;
-  _bl = STBY - pit;
-  _br = STBY - pit; // Wired wrong
+  _fl = STBY + ((pit + yaw - rol) * -1);
+  _fr = STBY + pit - yaw + rol;
+  _bl = STBY + ((pit + yaw + rol) * -1);
+  _br = STBY + ((pit - yaw - rol) * -1); // Wired wrong
 
   if (abs(STBY - _fl) > 100)
   {
