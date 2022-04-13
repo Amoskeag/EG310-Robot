@@ -10,17 +10,12 @@
 #include "operator.h"
 #include "Servo.h"
 
-#define PWM_FL 9
-#define PWM_FR 10
-#define PWM_BL 11
-#define PWM_BR 12
+#define PWM_FL 10
+#define PWM_FR 11
+#define PWM_BL 9
+#define PWM_BR 13
 
 #define STBY 1500
-
-#define fL_Encoder 2
-#define fR_Encoder 3
-#define bL_Encoder 20
-#define bR_Encoder 21
 
 bool previous_state_A = LOW;
 
@@ -34,7 +29,16 @@ Servo back_left_mecanum;
 Servo back_right_mecanum;
 // More modules
 
-const Operator humanOperator = Operator(1, 2, 3);
+const Operator humanOperator = Operator(51, 50, 52);
+
+int pit;
+int rol;
+int yaw;
+
+int _fl;
+int _fr;
+int _bl;
+int _br;
 
 void setup()
 {
@@ -58,14 +62,50 @@ void setup()
 
 void loop()
 {
-  int pit = STBY - humanOperator.getPitch();
-  int rol = STBY - humanOperator.getRoll();
-  int yaw = STBY - humanOperator.getYaw();
+  pit = STBY - humanOperator.getPitch();
+  rol = STBY - humanOperator.getRoll();
+  yaw = STBY - humanOperator.getYaw();
 
-  front_left_mecanum.writeMicroseconds(STBY + rol + pit - yaw);
-  front_right_mecanum.writeMicroseconds(STBY + -rol + pit - yaw);
-  back_left_mecanum.writeMicroseconds(STBY + rol + pit + yaw);
-  back_right_mecanum.writeMicroseconds(STBY + -rol + pit + yaw);
+  _fl = STBY + ((pit + yaw - rol) * -1);
+  _fr = STBY + pit - yaw + rol;
+  _bl = STBY + ((pit + yaw + rol) * -1);
+  _br = STBY + ((pit - yaw - rol) * -1); // Wired wrong
+
+  if (abs(STBY - _fl) > 100)
+  {
+    front_left_mecanum.writeMicroseconds(_fl);
+  }
+  else
+  {
+    front_left_mecanum.writeMicroseconds(STBY);
+  }
+
+  if (abs(STBY - _fr) > 100)
+  {
+    front_right_mecanum.writeMicroseconds(_fr);
+  }
+  else
+  {
+    front_right_mecanum.writeMicroseconds(STBY);
+  }
+
+  if (abs(STBY - _bl) > 100)
+  {
+    back_left_mecanum.writeMicroseconds(_bl);
+  }
+  else
+  {
+    back_left_mecanum.writeMicroseconds(STBY);
+  }
+
+  if (abs(STBY - _br) > 100)
+  {
+    back_right_mecanum.writeMicroseconds(_br);
+  }
+  else
+  {
+    back_right_mecanum.writeMicroseconds(STBY);
+  }
 }
 
 /*void updateEncoder(int EncoderPinA, int EncoderPinB, bool previousStateA ){

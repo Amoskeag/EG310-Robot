@@ -20,6 +20,6 @@ revision = (
     .decode("utf-8")
 )
 
-motd = f"\\r\\nStarting gc-1000-gps software. Using version {revision}\\r\\nThis software compiled on {today.strftime('%B %d, %Y')}.\\r\\n\\r\\n"
+motd = f"\\r\\nStarting Winston software. Using version {revision}\\r\\nThis software compiled on {today.strftime('%B %d, %Y')}.\\r\\n\\r\\n"
 
 print(f"-DMOTD='\"{motd}\"'")
